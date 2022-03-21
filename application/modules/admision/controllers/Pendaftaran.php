@@ -35,7 +35,7 @@ class Pendaftaran extends CI_Controller
 
         } else {
 
-            $data['asuransii'] = $this->PendaftaranModel->asuransi();
+            $data['asuransi'] = $this->PendaftaranModel->asuransi();
             $data['poliklinik'] = $this->PendaftaranModel->poliklinik();
     
             $this->template->render('admision.pendaftaran.index', $data);
@@ -57,4 +57,5 @@ class Pendaftaran extends CI_Controller
 
         echo $option;
     }
+	
 }

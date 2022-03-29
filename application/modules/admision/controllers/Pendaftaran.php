@@ -13,13 +13,13 @@ class Pendaftaran extends CI_Controller
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
 
             $data = [
-                'nama_pasien' => $this->input->post('name_pasien'),
+                'nama_pasien' => $this->input->post('nama_pasien'),
                 'nik' => $this->input->post('nik'),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'tgl_berobat' => $this->input->post('tgl_berobat'),
                 'id_asuransi' => $this->input->post('id_asuransi'),
-                'id_polikllinik' => $this->input->post('id_poliklinik'),
+                'id_poliklinik' => $this->input->post('id_poliklinik'),
                 'id_dokter' => $this->input->post('id_dokter'),
             ];
 

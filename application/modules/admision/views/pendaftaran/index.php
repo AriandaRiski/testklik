@@ -177,7 +177,8 @@
                 e.preventDefault(); 
 
                 $.ajax({
-                    type: $(this).attr('method'),
+                    url :"<?php echo base_url('admision/pendaftaran') ?>",
+                    type: "POST",
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response){

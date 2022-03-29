@@ -63,17 +63,17 @@
                             </thead>
 
                             <tbody>
-                                <?php $nama_poli = ['ANAK', 'PENYAKIT DALAM', 'BEDAH', 'JANTUNG', 'MATA'] ?>
 
-                                <?php foreach($nama_poli as $key => $poli): ?>
+                                
+
+                                <?php foreach($tahun as $key => $t): ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
-                                        <td>POLI <?= $poli ?></td>
-                                        <?php foreach(range(1, 12) as $month): ?>
-                                            <td>0</td>
-                                        <?php endforeach; ?>
+                                        <td><?= $t->jan ?></td>
+                                        
                                     </tr>
                                 <?php endforeach; ?>
+
                             </tbody>
                         </table>
                     </div>

@@ -5,7 +5,7 @@ class LaporanModel extends CI_Model
     public function kunjungan_poliklinik($tahun)
     {
     
-    $this->db->select(
+   $this->db->select(
     'nama_poliklinik,
 	SUM( IF( MONTH(tgl_berobat), 1 , 0) ) AS jan,
 	SUM( IF( MONTH(tgl_berobat), 2 , 0) ) AS feb,
@@ -20,10 +20,9 @@ class LaporanModel extends CI_Model
 	SUM( IF( MONTH(tgl_berobat), 11 , 0) ) AS nov,
 	SUM( IF( MONTH(tgl_berobat), 12 , 0) ) AS des'
     );
-     
+    $this->db->where('year(b.tgl_berobat)',$tahun); 
     $this->db->join('tbl_poliklinik as a','a.id_poliklinik = b.id_poliklinik','left');
-    $this->db->where('tgl_berobat');
-    $this->db->group_by('nama_poliklinik');
+    $this->db->group_by('a.nama_poliklinik');
     return $this->db->get('tbl_pendaftaran b')->result();
     
 

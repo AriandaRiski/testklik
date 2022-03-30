@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <br>
-
+<div style="overflow-x: auto;">
                         <table id="data_kunjungan" class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
@@ -64,18 +64,28 @@
 
                             <tbody>
 
-                                
-
-                                <?php foreach($tahun as $key => $t): ?>
+                                 <?php foreach($kunjungan as $key => $lap): ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
-                                        <td><?= $t->jan ?></td>
-                                        
+                                        <td><?= $lap->nama_poliklinik ?></td>
+                                        <td><?= $lap->jan ?></td>
+                                        <td><?= $lap->feb ?></td>
+                                        <td><?= $lap->mar ?></td>
+                                        <td><?= $lap->apr ?></td>
+                                        <td><?= $lap->mei ?></td>
+                                        <td><?= $lap->jun ?></td>
+                                        <td><?= $lap->jul ?></td>
+                                        <td><?= $lap->agu ?></td>
+                                        <td><?= $lap->sep ?></td>
+                                        <td><?= $lap->okt ?></td>
+                                        <td><?= $lap->nov ?></td>
+                                        <td><?= $lap->des ?></td>
                                     </tr>
                                 <?php endforeach; ?>
 
                             </tbody>
                         </table>
+                    </div>
                     </div>
                 </div>
             </div>

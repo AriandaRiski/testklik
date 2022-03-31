@@ -20,10 +20,10 @@ class LaporanModel extends CI_Model
 	SUM( IF( MONTH(tgl_berobat)=11, 1 , 0) ) AS nov,
 	SUM( IF( MONTH(tgl_berobat)=12, 1 , 0) ) AS des'
     );
-    $this->db->where('year(b.tgl_berobat)',$tahun); 
-    $this->db->join('tbl_poliklinik as a','a.id_poliklinik = b.id_poliklinik','left');
-    $this->db->group_by('a.nama_poliklinik');
-    return $this->db->get('tbl_pendaftaran b')->result();
+    // $this->db->where('year(b.tgl_berobat)',$tahun); 
+    $this->db->join('tbl_pendaftaran as b','a.id_poliklinik = b.id_poliklinik and year(tgl_berobat) ='.$tahun,'left');
+    $this->db->group_by('a.id_poliklinik');
+    return $this->db->get('tbl_poliklinik a')->result();
     
 
     }

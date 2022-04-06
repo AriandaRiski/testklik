@@ -57,5 +57,11 @@ class Pendaftaran extends CI_Controller
 
         echo $option;
     }
+
+    public function fetch_pasien(){
+        $pasien = $this->PendaftaranModel->ambil_data_pasien();
+
+        echo json_encode($pasien);
+    }
 	
 }

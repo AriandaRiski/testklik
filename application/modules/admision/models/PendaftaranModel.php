@@ -25,4 +25,9 @@ class PendaftaranModel extends CI_Model
 
         return $this->db->insert_id();
     }
+
+    public function ambil_data_pasien()
+    {
+        return $this->db->get('tbl_user')->result();
+    }
 }

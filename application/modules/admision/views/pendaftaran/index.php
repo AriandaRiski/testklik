@@ -17,7 +17,7 @@
                         
                         <form class="form-sample" id="form_pendaftaran" action="<?= current_url() ?>" method="POST">
                             <p class="card-description">
-                                Biodata Pasien
+                                Biodata Pasien <a href="#">TEST</a>
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -26,49 +26,13 @@
                                             <label for="id_pasien" class="col-form-label">Pilih Pasien</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" id="id_pasien" name="nama_pasien" class="form- pilih_pasien" required>
+                                            <input type="hidden" name="id_pasien">
+                                            <input type="text" id="nama_pasien" class="form-control pilih_pasien" required>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-sm-4">
-                                            <label for="nik" class="col-form-label">NIK</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <input type="text" id="nik" name="nik" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-
-                                    <!-- <div class="row g-3 align-items-center">
-                                        <div class="col-sm-4">
-                                            <label for="jenis_kelamin" class="col-form-label">Jenis Kelamin</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control" required>
-                                                <option value="">Pilih Jenis Kelamin</option>
-                                                <option value="1">Laki-laki</option>
-                                                <option value="2">Perempuan</option>
-                                            </select>
-                                        </div>
-                                    </div> -->
-
-                                </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="row g-3 align-items-center">
-                                        <div class="col-sm-4">
-                                            <label for="tgl_lahir" class="col-form-label">Tgl.Lahir</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
+                          
                             <br>
                             <p class="card-description">
                                 Detail Pendaftaran
@@ -165,19 +129,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <table class="table table-hover table-responsive" id="table1">
+        <table style="width: 100%" class="table table-striped table-hovered table-bordered" id="biodata-pasien">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Nama Pasien</th>
                     <th>JK</th>
                     <th>Tgl.Lahir</th>
                     <th>No.Identitas</th>
-                    <th>Aksi</th>
-                    </tr>
-                    </thead>
-                <tbody id="ambildata">
-                
-                </tbody>
+                    <th></th>
+                </tr>
+            </thead>
         </table>
       </div>
       <div class="modal-footer">
@@ -187,66 +148,28 @@
   </div>
 </div>
 
+
 <script>
     document.onreadystatechange = () => {
         if (document.readyState === "complete") {
-            
+
+            var table;
+
             $('.pilih_pasien').click(function(){
-                // $.get('?>= site_url('admision/pendaftaran/fetch_pasien') ?>')
-                // $.get(site_url+'admision/pendaftaran/fetch_pasien', function(response){
-
-                    // var data_pasien = '';
-                    // $.each(response, function(index, item){
-                    //     data_pasien += `
-                    //                 <tr>
-                    //                     <td>`+item.nama_user+`</td>
-                    //                     <td>`+item.jenis_kelamin+`</td>
-                    //                     <td>`+item.tgl_lahir+`</td>
-                    //                     <td>`+item.no_identitas+`</td>
-                    //                     <td>
-                    //                     <button class="btn btn-xs btn-primary">Pilih</button>
-                    //                     </td>
-                    //                 </tr>
-                    //                 `;
-                    // });
-        table = $('#table1').DataTable({
-        "responsive": true,
-        "destroy": true,
-        "processing": true,
-        "serverSide": true,
-        "order": [],
-
-        "ajax": {
-            "url": "<?= site_url('admision/pendaftaran/ambildata') ?>",
-            "dataType" : "json",
-            "type": "POST"
-        },
-
-
-        // "row" : [
-        //             {"data" : "nama_user"},
-        //             {"data" : "jenis_Kelamin"},
-        //             {"data" : "tgl_lahir"},
-        //             {"data" : "no_identitas"},
-        //             {"data" : "aksi"}
-
-        // ],
-
-        "columnDefs": [{
-            "targets": [0],
-            "orderable": false
-              
-        }],
-
-    });
-                //tugas :  buat pagination per 10 data  menggunakan datatable-server-side datatable.js
-                // $('#data_pasien').html(data_pasien);
-                $('#ambildata').html(ambildata);
+                
                 $('#exampleModal').modal('show');
-
-                // }, 'JSON');                
+                if (!table) {
+                    table = $('#biodata-pasien').DataTable({
+                        serverSide: true,
+                        processing: true,
+                        ajax: {
+                            url: site_url + 'admision/pendaftaran/fetch_pasien',
+                            type: 'POST'
+                        }
+                    });
+                }
             });
-
+            
             $('#btn-save').removeAttr('disabled');
 
             $('#id_poliklinik').change(function(){
@@ -259,12 +182,21 @@
                 });
             });
 
+            $(document).on('click', '.pilih-pasien', function(e){
+                var id_user = $(this).attr('data-id');
+                var nama_user = $(this).attr('data-namauser');
+
+                $('#nama_pasien').val(nama_user);
+                $('input[name=id_pasien]').val(id_user);
+
+                $('#exampleModal').modal('hide');
+            });
+
             $('#form_pendaftaran').submit(function(e){
                 e.preventDefault(); 
 
                 $.ajax({
-                    url :"<?php echo base_url('admision/pendaftaran') ?>",
-                    type: "POST",
+                    type: $(this).attr('method'),
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response){

@@ -58,45 +58,14 @@ class Pendaftaran extends CI_Controller
         echo $option;
     }
 
-    public function fetch_pasien(){
-        $pasien = $this->PendaftaranModel->ambil_data_pasien();
-
-        echo json_encode($pasien);
-    }
-
-    public function ambildata()
+    public function fetch_pasien()
     {
-        if ($this->input->is_ajax_request() == true) {
-            $this->load->model('PendaftaranModel', 'user');
-            $list = $this->user->get_datatables();
-            $data = array();
-            $tes = [];
-            // $no = $_POST['start'];
-            foreach ($list as $field) {
-                
-                // $no++;
-                $row = array();
-               
-                // $row[] = $no;
-                $row[] = $field->nama_user;
-                $row[] = $field->jenis_kelamin == '1' ? $tes = "laki-laki" : $tes = "perempuan";
-                $row[] = date_format(date_create($field->tgl_lahir), "d-M-Y");
-                $row[] = $field->no_identitas;
-                $row[] = "<button class='btn btn-info btn-sm'>pilih</button>";
-                $data[] = $row;                
-            }
+        
+        $this->datatables->select('nama_user, jenis_kelamin, tgl_lahir, no_identitas, id_user');
+        $this->datatables->from('tbl_user');
+        $this->datatables->edit_column('id_user', '<button data-id="$1" data-namauser="$2" class="btn btn-xs btn-success pilih-pasien"><i class="fa fa-check"></i> Pilih Pasien</button>', 'id_user, nama_user');
 
-            $output = array(
-                "draw" => $_POST['draw'],
-                "recordsTotal" => $this->user->count_all(),
-                "recordsFiltered" => $this->user->count_filtered(),
-                "data" => $data,
-            );
-            //output dalam format JSON
-            echo json_encode($output);
-        } else {
-            exit('Maaf data tidak bisa ditampilkan');
-        }
+        
+        echo $this->datatables->generate();
     }
-	
 }

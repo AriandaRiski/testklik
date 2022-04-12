@@ -165,17 +165,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <table class="table table-striped table-hover table-responsive">
+        <table class="table table-hover table-responsive" id="table1">
             <thead>
                 <tr>
                     <th>Nama</th>
                     <th>JK</th>
                     <th>Tgl.Lahir</th>
                     <th>No.Identitas</th>
-                    <th></th>
+                    <th>Aksi</th>
                     </tr>
                     </thead>
-                <tbody id="data_pasien">
+                <tbody id="ambildata">
                 
                 </tbody>
         </table>
@@ -193,27 +193,58 @@
             
             $('.pilih_pasien').click(function(){
                 // $.get('?>= site_url('admision/pendaftaran/fetch_pasien') ?>')
-                $.get(site_url+'admision/pendaftaran/fetch_pasien', function(response){
+                // $.get(site_url+'admision/pendaftaran/fetch_pasien', function(response){
 
-                    var data_pasien = '';
-                    $.each(response, function(index, item){
-                        data_pasien += `
-                                    <tr>
-                                        <td>`+item.nama_user+`</td>
-                                        <td>`+item.jenis_kelamin+`</td>
-                                        <td>`+item.tgl_lahir+`</td>
-                                        <td>`+item.no_identitas+`</td>
-                                        <td>
-                                        <button class="btn btn-xs btn-primary">Pilih</button>
-                                        </td>
-                                    </tr>
-                                    `;
-                    });
-                //tugas :  buat pagination per 10 data  menggunakan datatable-server-side
-                $('#data_pasien').html(data_pasien);
+                    // var data_pasien = '';
+                    // $.each(response, function(index, item){
+                    //     data_pasien += `
+                    //                 <tr>
+                    //                     <td>`+item.nama_user+`</td>
+                    //                     <td>`+item.jenis_kelamin+`</td>
+                    //                     <td>`+item.tgl_lahir+`</td>
+                    //                     <td>`+item.no_identitas+`</td>
+                    //                     <td>
+                    //                     <button class="btn btn-xs btn-primary">Pilih</button>
+                    //                     </td>
+                    //                 </tr>
+                    //                 `;
+                    // });
+        table = $('#table1').DataTable({
+        "responsive": true,
+        "destroy": true,
+        "processing": true,
+        "serverSide": true,
+        "order": [],
+
+        "ajax": {
+            "url": "<?= site_url('admision/pendaftaran/ambildata') ?>",
+            "dataType" : "json",
+            "type": "POST"
+        },
+
+
+        // "row" : [
+        //             {"data" : "nama_user"},
+        //             {"data" : "jenis_Kelamin"},
+        //             {"data" : "tgl_lahir"},
+        //             {"data" : "no_identitas"},
+        //             {"data" : "aksi"}
+
+        // ],
+
+        "columnDefs": [{
+            "targets": [0],
+            "orderable": false
+              
+        }],
+
+    });
+                //tugas :  buat pagination per 10 data  menggunakan datatable-server-side datatable.js
+                // $('#data_pasien').html(data_pasien);
+                $('#ambildata').html(ambildata);
                 $('#exampleModal').modal('show');
 
-                }, 'JSON');                
+                // }, 'JSON');                
             });
 
             $('#btn-save').removeAttr('disabled');

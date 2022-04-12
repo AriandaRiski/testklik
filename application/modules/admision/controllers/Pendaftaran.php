@@ -13,13 +13,19 @@ class Pendaftaran extends CI_Controller
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
 
             $data = [
-                'nama_pasien' => $this->input->post('nama_pasien'),
-                'nik' => $this->input->post('nik'),
-                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                // 'nama_user' => $this->input->post('nama_user'),
+                // 'nik' => $this->input->post('nik'),
+                // 'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                // 'tgl_lahir' => $this->input->post('tgl_lahir'),
+                // 'tgl_berobat' => $this->input->post('tgl_berobat'),
+                // 'id_asuransi' => $this->input->post('id_asuransi'),
+                // 'id_poliklinik' => $this->input->post('id_poliklinik'),
+                // 'id_dokter' => $this->input->post('id_dokter'),
+
                 'tgl_berobat' => $this->input->post('tgl_berobat'),
                 'id_asuransi' => $this->input->post('id_asuransi'),
                 'id_poliklinik' => $this->input->post('id_poliklinik'),
+                'id_pasien' => $this->input->post('id_pasien'),
                 'id_dokter' => $this->input->post('id_dokter'),
             ];
 
@@ -52,7 +58,7 @@ class Pendaftaran extends CI_Controller
         $option = '<option value="">Pilih Dokter</option>';
 
         foreach($dokters as $dokter) {
-            $option .= '<option value="'.$dokter->id_dokter.'">'.$dokter->nama_dokter.'</option>';
+            $option .= '<option value="'.$dokter->id_dokter.'">'.$dokter->nama_user.'</option>';
         }
 
         echo $option;

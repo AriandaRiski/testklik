@@ -14,9 +14,14 @@ class PendaftaranModel extends CI_Model
 
     public function dokter($id_poliklinik)
     {
-        return $this->db->get_where('tbl_dokter', [
-            'id_poliklinik' => $id_poliklinik
-        ])->result();
+        // return $this->db->get_where('tbl_dokter_jaga', [
+        //     'id_poliklinik' => $id_poliklinik
+        // ])->result();
+
+        $this->db->select('b.nama_user, a.id_dokter');
+        $this->db->join('tbl_dokter_jaga a', 'a.id_dokter = b.id_user');
+        $this->db->where('a.id_poliklinik', $id_poliklinik);
+        return $this->db->get('tbl_user b')->result();
     }
 
     public function insert($data)

@@ -17,7 +17,7 @@
                         
                         <form class="form-sample" id="form_pendaftaran" action="<?= current_url() ?>" method="POST">
                             <p class="card-description">
-                                Biodata Pasien <a href="#">TEST</a>
+                                Biodata Pasien 
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -91,7 +91,7 @@
                                             <label for="id_dokter" class="col-form-label">Pilih Dokter</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <select name="id_dokter" id="id_dokter" class="form-control" required>
+                                            <select name="id_dokter" id="id_dokter" class="form-control">
                                                 <option value="">Pilih Dokter</option>
                                             </select>
                                         </div>

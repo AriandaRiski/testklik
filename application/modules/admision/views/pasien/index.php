@@ -36,7 +36,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Pasien</th>
-                                    <th>NIK</th>
+                                    <th>No.Identitas</th>
                                     <th>Tgl.Berobat</th>
                                     <th>Asuransi</th>
                                     <th>Poliklinik</th>
@@ -47,12 +47,14 @@
                                 <?php foreach($pasiens as $key => $pasien): ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
-                                        <td><?= $pasien->nama_pasien ?></td>
-                                        <td><?= $pasien->nik ?></td>
+                                        <td><?= $pasien->namapas ?></td>
+                                        <td><?= $pasien->no_identitas ?></td>
                                         <td><?= $pasien->tgl_berobat ?></td>
                                         <td><?= $pasien->nama_asuransi ?></td>
                                         <td><?= $pasien->nama_poliklinik ?></td>
                                         <td><?= $pasien->nama_dokter ?></td>
+                                        
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
